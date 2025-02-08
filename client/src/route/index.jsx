@@ -4,6 +4,12 @@ import Home from "../pages/Home";
 import Search from "../components/SearchPage";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+import ForgotPassword from "../pages/ForgotPassword";
+import OtpVerification from "../pages/OtpVerification";
+import ResetPassword from "../pages/ResetPassword";
+import UserMenuMobile from "../pages/UserMenuMobile";
+import Dashboard from "../layouts/Dashboard";
+import Profile from "../pages/Profile";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -24,7 +30,35 @@ const router = createBrowserRouter([
             {
                 path: "register",
                 element: <Register/>
+            },
+            {
+                path: "forgot-password",
+                element: <ForgotPassword/>
+            },
+            {
+                path: "otp-verification",
+                element: <OtpVerification/>
+            },
+            {
+                path: "reset-password",
+                element: <ResetPassword/>
+            },
+            {
+                path : "user",
+                element : <UserMenuMobile/>
+            },
+            {
+                path : "dashboard",
+                element : <Dashboard/>,
+                children:
+                [{
+                    path : "profile",
+                    element : <Profile/>
+                }
+            ]
+
             }
+
         ]
     }
 ]);

@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
-// import dotenv from 'dotenv';
-// dotenv.config();
+import dotenv from 'dotenv';
+dotenv.config();
 import UserModel from '../models/user.model.js';
 
 const generatedRefreshToken = async(userId) =>{

@@ -31,7 +31,7 @@ const SummaryApi = {
     },
     logout : {
         url : "/api/user/logout",
-        method : 'get'
+        method : 'post'
     },
     uploadAvatar : {
         url : "/api/user/upload-avatar",
