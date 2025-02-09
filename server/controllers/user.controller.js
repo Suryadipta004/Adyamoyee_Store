@@ -23,7 +23,7 @@ export async function registerUserController(request,response){
             })
         }
 
-        const user = await UserModel.findOne({ email })
+        const user = await UserModel.findOne({ email })//check email is already register or not
 
         if(user){
             return response.json({

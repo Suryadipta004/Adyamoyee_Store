@@ -10,6 +10,12 @@ import ResetPassword from "../pages/ResetPassword";
 import UserMenuMobile from "../pages/UserMenuMobile";
 import Dashboard from "../layouts/Dashboard";
 import Profile from "../pages/Profile";
+import CategoryPage from "../pages/CategoryPage";
+import SubCategoryPage from "../pages/SubCategoryPage";
+import ProductAdmin from "../pages/ProductAdmin";
+import UploadProduct from "../pages/UploadProduct";
+
+
 const router = createBrowserRouter([
     {
         path: "/",
@@ -51,11 +57,28 @@ const router = createBrowserRouter([
                 path : "dashboard",
                 element : <Dashboard/>,
                 children:
-                [{
+                [
+                    {
                     path : "profile",
                     element : <Profile/>
-                }
-            ]
+                    },
+                    {
+                        path: "category",
+                        element: <CategoryPage/>
+                    },
+                    {
+                        path: "subcategory",
+                        element: <SubCategoryPage/>
+                    },
+                    {
+                        path: "upload-product",
+                        element: <UploadProduct/>
+                    },
+                    {
+                        path: "product",
+                        element: <ProductAdmin/>
+                    }
+                ]
 
             }
 

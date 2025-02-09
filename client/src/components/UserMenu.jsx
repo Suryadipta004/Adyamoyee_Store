@@ -63,7 +63,7 @@ const UserMenu = ({close}) => {
             }
             {
                 isAdmin(user.role)&&(
-                    <Link onClick={handleClose} to={"/dashboard/subcategory"} className='px-2 hover:bg-primary-100 py-1'>Sub Category</Link>
+                    <Link onClick={handleClose} to={"/dashboard/subcategory"} className='px-2 hover:bg-primary-100 py-1'>Sub-Category</Link>
                 )
             }
             {
@@ -73,7 +73,7 @@ const UserMenu = ({close}) => {
             }
             {
                 isAdmin(user.role)&&(
-                    <Link onClick={handleClose} to={"/dashboard/product"} className='px-2 hover:bg-primary-100 py-1'>Product</Link>
+                    <Link onClick={handleClose} to={"/dashboard/product"} className='px-2 hover:bg-primary-100 py-1'>Products</Link>
                 )
             }
             <Link onClick={handleClose} to={"/dashboard/myorders"} className='px-2 hover:bg-primary-100 py-1'>My Orders</Link>
