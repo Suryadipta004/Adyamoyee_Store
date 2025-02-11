@@ -4,7 +4,7 @@ import { AddCategoryController, getCategoryController,updateCategoryController,d
 
 const categoryRouter = Router()
 
-categoryRouter.post('/add-category',auth,AddCategoryController)
+categoryRouter.post('/create',auth,AddCategoryController)
 categoryRouter.get('/get',getCategoryController)
 categoryRouter.put('/update',auth,updateCategoryController)
 categoryRouter.delete('/delete',auth,deleteCategoryController)
