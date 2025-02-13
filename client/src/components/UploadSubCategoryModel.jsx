@@ -8,6 +8,7 @@ import AxiosToastError from '../utils/AxiosToastError';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 
+
 const UploadSubCategoryModel = ({close, fetchData}) => {
     // set the data with name and image fields
     const [data,setData] = useState({
@@ -15,7 +16,7 @@ const UploadSubCategoryModel = ({close, fetchData}) => {
         image : "",
         category: []
     })
-    const allCategory = useSelector(state => state.product.allCategory)
+    // const allCategory = useSelector(state => state.product.allCategory)
 
     const [loading,setLoading] = useState(false)//set the loading state
 
@@ -72,15 +73,15 @@ const UploadSubCategoryModel = ({close, fetchData}) => {
             }
         })
     }
-    const handleRemoveCategorySelected = (categoryId)=>{
-        const index = subCategoryData.category.findIndex(el => el._id === categoryId )
-        subCategoryData.category.splice(index,1)
-        setSubCategoryData((preve)=>{
-            return{
-                ...preve
-            }
-        })
-    }
+    // const handleRemoveCategorySelected = (categoryId)=>{
+    //     const index = subCategoryData.category.findIndex(el => el._id === categoryId )
+    //     subCategoryData.category.splice(index,1)
+    //     setSubCategoryData((preve)=>{
+    //         return{
+    //             ...preve
+    //         }
+    //     })
+    // }
 
   return (
     <section className='fixed top-0 bottom-0 left-0 right-0 p-4 bg-neutral-800 bg-opacity-60 flex items-center justify-center'>
@@ -131,9 +132,9 @@ const UploadSubCategoryModel = ({close, fetchData}) => {
                         </label>
                         
                     </div>
-                    <div>
+                    <div className='grid gap-1'>
                         <label>Select Category</label>
-                        <div>
+                        <div className='border focus-within:border-primary-200 rounded'>
                         {/* display value */}
                             <div>
                                 {
@@ -151,29 +152,11 @@ const UploadSubCategoryModel = ({close, fetchData}) => {
 
                             </div>
                         {/* select category */}
-                        <select
-                                className='w-full p-2 bg-transparent outline-none border'
-                                onChange={(e)=>{
-                                    const value = e.target.value
-                                    const categoryDetails = allCategory.find(el => el._id == value)
-                                    
-                                    setData((preve)=>{
-                                        return{
-                                            ...preve,
-                                            category : [...preve.category,categoryDetails]
-                                        }
-                                    })
-                                }}
-                            >
-                                <option>Select Category</option>
-                                {
-                                    allCategory.map((category,index)=>{
-                                        return(
-                                            <option value={category?._id} key={category._id+"subcategory"}>{category?.name}</option>
-                                        )
-                                    })
-                                }
-                            </select>
+                        <select className='w-full p-2 bg-transparent outline-none'>
+                            <option value={""}>
+                                Select Catagory
+                            </option>
+                        </select>
                         
                         </div>
                     </div>
