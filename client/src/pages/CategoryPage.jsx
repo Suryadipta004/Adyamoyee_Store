@@ -8,6 +8,7 @@ import EditCategory from '../components/EditCategory'
 import CofirmBox from '../components/CofirmBox'
 import toast from 'react-hot-toast'
 import AxiosToastError from '../utils/AxiosToastError'
+import { useSelector } from 'react-redux'
 
 const CategoryPage = () => {
     const [openUploadCategory,setOpenUploadCategory] = useState(false)
@@ -22,6 +23,9 @@ const CategoryPage = () => {
     const [deleteCategory,setDeleteCategory] = useState({
         _id : ""
     })
+
+
+    const allCategory = useSelector(state => state.product.allCategory)
 
     const fetchCategory = async()=>{
         try {
@@ -40,6 +44,10 @@ const CategoryPage = () => {
             setLoading(false)
         }
     }
+
+    useEffect(()=>{
+        setCategoryData(allCategory)
+    },[allCategory])
 
     useEffect(()=>{
         fetchCategory()
@@ -66,7 +74,7 @@ const CategoryPage = () => {
 
   return (
     <section className=''>
-        <div className='p-2   bg-white shadow-md flex items-center justify-between'>
+        <div className='p-2 bg-white shadow-md flex items-center justify-between'>
             <h2 className='font-semibold'>Category</h2>
             <button onClick={()=>setOpenUploadCategory(true)} className='text-sm border border-primary-200 hover:bg-primary-200 px-3 py-1 rounded'>Add Category</button>
         </div>
@@ -76,7 +84,7 @@ const CategoryPage = () => {
             )
         }
 
-        <div className='p-4 grid  grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2'>
+        <div className='p-4 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2'>
             {
                 categoryData.map((category,index)=>{
                     return(
@@ -86,6 +94,7 @@ const CategoryPage = () => {
                                 src={category.image}
                                 className='w-full object-scale-down'
                             />
+                            <div className='p-1'>{category.name}</div>
                             <div className='items-center h-9 flex gap-2'>
                                 <button onClick={()=>{
                                     setOpenEdit(true)

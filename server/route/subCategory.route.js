@@ -1,13 +1,13 @@
 import { Router } from 'express'
 import auth from '../middleware/auth.js'
-import { AddsubCategoryController, getsubCategoryController,updatesubCategoryController,deletesubCategoryController } from '../controllers/subCategory.controller.js'
+import { AddSubCategoryController, getSubCategoryController,updateSubCategoryController,deleteSubCategoryController } from '../controllers/subCategory.controller.js'
 
 const subCategoryRouter = Router()
 
-subCategoryRouter.post('/add-category',auth,AddsubCategoryController)
-subCategoryRouter.get('/get',getsubCategoryController)
-subCategoryRouter.put('/update',auth,updatesubCategoryController)
-subCategoryRouter.delete('/delete',auth,deletesubCategoryController)
+subCategoryRouter.post('/create',auth,AddSubCategoryController)
+subCategoryRouter.post('/get',getSubCategoryController)
+subCategoryRouter.put('/update',auth,updateSubCategoryController)
+subCategoryRouter.delete('/delete',auth,deleteSubCategoryController)
 
 
 

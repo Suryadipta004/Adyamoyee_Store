@@ -16,7 +16,7 @@ const UploadSubCategoryModel = ({close, fetchData}) => {
         image : "",
         category: []
     })
-    // const allCategory = useSelector(state => state.product.allCategory)
+    const allCategory = useSelector(state => state.product.allCategory)
 
     const [loading,setLoading] = useState(false)//set the loading state
 
@@ -73,20 +73,20 @@ const UploadSubCategoryModel = ({close, fetchData}) => {
             }
         })
     }
-    // const handleRemoveCategorySelected = (categoryId)=>{
-    //     const index = subCategoryData.category.findIndex(el => el._id === categoryId )
-    //     subCategoryData.category.splice(index,1)
-    //     setSubCategoryData((preve)=>{
-    //         return{
-    //             ...preve
-    //         }
-    //     })
-    // }
+    const handleRemoveCategorySelected = (categoryId)=>{
+        const index = data.category.findIndex(el => el._id === categoryId )
+        data.category.splice(index,1)
+        setData((preve)=>{
+            return{
+                ...preve
+            }
+        })
+    }
 
   return (
     <section className='fixed top-0 bottom-0 left-0 right-0 p-4 bg-neutral-800 bg-opacity-60 flex items-center justify-center'>
         <div className='bg-white max-w-4xl w-full p-4 rounded'>
-            <div className='flex items-center justify-between'>
+            <div className='flex items-center justify-between gap-3'>
                 <h1 className='font-semibold'>Add Sub-Category</h1>
                 <button onClick={close} className='w-fit block ml-auto'>
                     <IoClose size={25}/>
@@ -96,53 +96,54 @@ const UploadSubCategoryModel = ({close, fetchData}) => {
                 <div className='grid gap-1'>
                     <label id='categoryName'>Name</label>
                     <input
-                        type='text'
-                        id='categoryName'
+                        id='name'
                         placeholder='Enter category name'
                         value={data.name}
                         name='name'
                         onChange={handleOnChange}
-                        className='bg-blue-50 p-2 border border-blue-100 focus-within:border-primary-200 outline-none rounded'
+                        className='bg-blue-50 p-3 border border-blue-100 focus-within:border-primary-200 outline-none rounded'
                     />
                 </div>
                 <div className='grid gap-1'>
                     <p>Image</p>
-                    <div className='flex gap-4 flex-col lg:flex-row items-center'>
-                        <div className='border bg-blue-50 h-36 w-full lg:w-36 flex items-center justify-center rounded'>
+                    <div className='flex flex-col lg:flex-row items-center gap-3'>
+                        <div className='border h-36 w-full lg:w-36 bg-blue-50 flex items-center justify-center'>
                             {
-                                data.image ? (
+                                !data.image ? (
+                                    <p className='text-sm text-neutral-500'>No Image</p>
+                                ) : (
                                     <img
                                         alt='category'
                                         src={data.image}
                                         className='w-full h-full object-scale-down'
                                     />
-                                ) : (
-                                    <p className='text-sm text-neutral-500'>No Image</p>
                                 )
                             }
                             
                         </div>
-                        <label htmlFor='uploadCategoryImage'>
-                            <div  className={`
-                            ${!data.name ? "bg-gray-300" : "border-primary-200 hover:bg-primary-100" }  
-                                px-4 py-2 rounded cursor-pointer border font-medium
-                            `}>Upload Image</div>
-
-                            <input disabled={!data.name} onChange={handleUploadSubCategoryImage} type='file' id='uploadCategoryImage' className='hidden'/>
+                        <label htmlFor='uploadSubCategoryImage'>
+                            <div className='px-4 py-1 border border-primary-100 text-primary-200 rounded hover:bg-primary-200 hover:text-neutral-900 cursor-pointer  '>
+                                    Upload Image
+                            </div>
+                            <input
+                            onChange={handleUploadSubCategoryImage} 
+                            type='file' 
+                            id='uploadSubCategoryImage' 
+                            className='hidden'
+                            />
                         </label>
-                        
                     </div>
                     <div className='grid gap-1'>
                         <label>Select Category</label>
                         <div className='border focus-within:border-primary-200 rounded'>
                         {/* display value */}
-                            <div>
+                            <div className='flex flex-wrap gap-2'>
                                 {
                                     data.category.map((item,index)=>{
                                         return(
-                                            <p key={item._id}>
+                                            <p key={item._id} className='bg-white shadow-md px-1 m-1 flex items-center gap-2'>
                                                 {item.name}
-                                                <div>
+                                                <div className='cursor-pointer hover:text-red-600' onClick={()=>handleRemoveCategorySelected(item._id)}>
                                                     <IoClose size={20}/>
                                                 </div>
                                             </p>
@@ -152,19 +153,38 @@ const UploadSubCategoryModel = ({close, fetchData}) => {
 
                             </div>
                         {/* select category */}
-                        <select className='w-full p-2 bg-transparent outline-none'>
+                        <select 
+                        className='w-full p-2 bg-transparent outline-none border'
+                        onChange={(e)=>{
+                                    const value = e.target.value
+                                    const categoryDetails = allCategory.find(el => el._id == value)
+                                    
+                                    setData((preve)=>{
+                                        return{
+                                            ...preve,
+                                            category : [...preve.category,categoryDetails]
+                                        }
+                                    })
+                                }}
+                            >
                             <option value={""}>
                                 Select Catagory
                             </option>
+                            {
+                                    allCategory.map((category,index)=>{
+                                        return(
+                                            <option value={category?._id} key={category._id+"subcategory"}>{category?.name}</option>
+                                        )
+                                    })
+                                }
                         </select>
-                        
                         </div>
                     </div>
                 </div>
 
                 <button
                     className={`
-                    ${data.name && data.image ? "bg-primary-200 hover:bg-primary-100" : "bg-gray-300 "}
+                    ${data?.name && data?.image && data?.category[0] ? "bg-primary-200 hover:bg-primary-100" : "bg-gray-300 "}
                     py-2    
                     font-semibold 
                     `}
