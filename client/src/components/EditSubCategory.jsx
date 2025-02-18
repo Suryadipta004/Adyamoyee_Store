@@ -77,7 +77,6 @@ const EditSubCategory = ({close,data,fetchData}) => {
                     fetchData()
                 }
             }
-
         } catch (error) {
             AxiosToastError(error)
         }
