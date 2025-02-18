@@ -94,7 +94,7 @@ const CategoryPage = () => {
                                 src={category.image}
                                 className='w-full object-scale-down'
                             />
-                            <div className='p-1'>{category.name}</div>
+                            {/* <div className='p-1'>{category.name}</div> */}
                             <div className='items-center h-9 flex gap-2'>
                                 <button onClick={()=>{
                                     setOpenEdit(true)
