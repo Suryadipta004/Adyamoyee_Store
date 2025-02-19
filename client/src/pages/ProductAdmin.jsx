@@ -27,7 +27,8 @@ const ProductAdmin = () => {
       })
       const responseData = response.data
       if(responseData.success){
-        setTotalPageCount(responseData.totalPageCount)
+        // console.log(responseData)
+        setTotalPageCount(responseData.totalNoPage)
         setData(responseData.data)
       }
     }catch (error) {
@@ -77,7 +78,7 @@ const ProductAdmin = () => {
   },[search])
 
 
-
+  console.log(search)
   
   return (
     <section className=''>
