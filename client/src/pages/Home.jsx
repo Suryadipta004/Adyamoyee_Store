@@ -2,12 +2,34 @@ import React from 'react'
 import banner from '../assets/banner.jpg'
 import bannerMobile from '../assets/banner-mobile.jpg'
 import { useSelector } from 'react-redux'
-// import {Link, useNavigate} from 'react-router-dom'
-import CategoryWiseProductDisplay from '../components/CategoryWiseProductDisplay.jsx'
+import {Link, useNavigate} from 'react-router-dom'
+// import CategoryWiseProductDisplay from '../components/CategoryWiseProductDisplay.jsx'
 
 const Home = () => {
   const loadingCategory = useSelector(state => state.product.loadingCategory)
   const categoryData = useSelector(state => state.product.allCategory)
+  const subCategoryData = useSelector(state => state.product.allSubCategory)
+  const navigate = useNavigate()
+
+
+  const handleRedirectProductListpage = (id,name) => {
+    console.log(id,name)
+    const subCategory = subCategoryData.find(sub =>{
+      const filterData = sub.category.some(c =>{
+        return c._id === id
+      })
+      // console.log(filterData)
+      return filterData ? true : false
+    })
+
+    const url = ``
+    console.log(url)
+    // navigate(url)  
+  }
+
+
+
+
   return (
     <section className='bg-white'>
       <div className='min-h-48 container mx-auto rounded  my-4 px-4'>
@@ -57,7 +79,7 @@ const Home = () => {
           )
         }
       </div>
-      {
+      {/* {
         categoryData?.map((c,index)=>{
           return(
             <CategoryWiseProductDisplay 
@@ -67,7 +89,7 @@ const Home = () => {
             />
           )
         })
-      }
+      } */}
     </section>
   )
 }
