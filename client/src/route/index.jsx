@@ -15,6 +15,7 @@ import SubCategoryPage from "../pages/SubCategoryPage";
 import ProductAdmin from "../pages/ProductAdmin";
 import UploadProduct from "../pages/UploadProduct";
 import AdminPermision from "../layouts/AdminPermision.jsx";
+import ProductListPage from "../pages/ProductListPage.jsx";
 
 
 const router = createBrowserRouter([
@@ -80,7 +81,15 @@ const router = createBrowserRouter([
                         element: <AdminPermision><ProductAdmin/></AdminPermision>
                     }
                 ]
-
+            },
+            {
+                path : ":category",
+                children : [
+                    {
+                        path : ":subCategory",
+                        element : <ProductListPage/>
+                    }
+                ]
             }
 
         ]
