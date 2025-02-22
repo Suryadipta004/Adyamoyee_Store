@@ -19,7 +19,7 @@ const Header = () => {
 
     const user = useSelector((state) => state?.user)
 
-    console.log("user",user)
+    // console.log("user",user)
 
     const handleCloseUserMenu = () => {
         setOpenUserMenu

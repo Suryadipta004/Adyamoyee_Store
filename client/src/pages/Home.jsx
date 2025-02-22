@@ -25,7 +25,7 @@ const Home = () => {
     // console.log(subcategory)
 
 
-    const url = `/${name.replace(/[, &]/g, "")}/${id}/${subcategory.name.replace(/[, ]/g, "")}/${subcategory._id}`
+    const url = `/${name}/${id}/${subcategory.name}/${subcategory._id}`
     navigate(url)
     // console.log(url)
 
@@ -33,7 +33,7 @@ const Home = () => {
 
   return (
     <section className='bg-white'>
-      <div className='min-h-48 container mx-auto rounded  my-4 px-4'>
+      <div className='container mx-auto'>
         <div className={`w-full h-full min-h-48 bg-blue-100 rounded ${!banner && "animate-pulse my-2" }`}>
           <img
             src={banner}
