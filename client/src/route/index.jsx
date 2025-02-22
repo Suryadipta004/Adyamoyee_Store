@@ -83,11 +83,11 @@ const router = createBrowserRouter([
                 ]
             },
             {
-                path : ":category",
+                path : ":category/:categoryId",
                 children : [
                     {
-                        path : ":subCategory",
-                        element : <ProductListPage/>
+                        path : ":subCategory/:subCategoryId",
+                        element : <ProductListPage />
                     }
                 ]
             }

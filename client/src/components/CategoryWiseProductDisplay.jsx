@@ -1,6 +1,6 @@
 import React from 'react'
 
-const CategoryWiseProductDisplay = () => {
+const CategoryWiseProductDisplay = ({id,name}) => {
   return (
     <div>CategoryWiseProductDisplay</div>
   )

@@ -3,7 +3,7 @@ import banner from '../assets/banner.jpg'
 import bannerMobile from '../assets/banner-mobile.jpg'
 import { useSelector } from 'react-redux'
 import {Link, useNavigate} from 'react-router-dom'
-// import CategoryWiseProductDisplay from '../components/CategoryWiseProductDisplay.jsx'
+import CategoryWiseProductDisplay from '../components/CategoryWiseProductDisplay'
 
 const Home = () => {
   const loadingCategory = useSelector(state => state.product.loadingCategory)
@@ -13,22 +13,23 @@ const Home = () => {
 
 
   const handleRedirectProductListpage = (id,name) => {
-    console.log(id,name)
-    const subCategory = subCategoryData.find(sub =>{
+    // console.log(id,name)
+    const subcategory = subCategoryData.find(sub =>{
+      // console.log(sub)
       const filterData = sub.category.some(c =>{
-        return c._id === id
+        return c._id == id
       })
       // console.log(filterData)
       return filterData ? true : false
     })
+    // console.log(subcategory)
 
-    const url = ``
-    console.log(url)
-    // navigate(url)  
+
+    const url = `/${name.replace(/[, &]/g, "")}/${id}/${subcategory.name.replace(/[, ]/g, "")}/${subcategory._id}`
+    navigate(url)
+    // console.log(url)
+
   }
-
-
-
 
   return (
     <section className='bg-white'>
@@ -50,16 +51,12 @@ const Home = () => {
 
       <div className='container mx-auto px-4 my-2 grid grid-cols-5 md:grid-cols-8 lg:grid-cols-10  gap-2'>
         {
-          loadingCategory ?(
-          new Array(20).fill(null).map((c,index)=>{
+          loadingCategory ? (
+          new Array(12).fill(null).map((c,index)=>{
             return(
               <div key={index+"loadingcategory"} className='bg-white rounded p-4 min-h-36 grid gap-2 shadow animate-pulse'>
                 <div className='bg-blue-100 min-h-24 rounded'></div>
                 <div className='bg-blue-100 h-8 rounded'></div>
-                <div>
-                <div></div>
-                <div></div>
-                </div>
               </div>
             )
           })
@@ -69,8 +66,10 @@ const Home = () => {
                   <div key={cat._id+"displayCategory"} className='w-full h-full' onClick={()=>handleRedirectProductListpage(cat._id,cat.name)}>
                     <div>
                         <img 
+                          alt={cat.name}
                           src={cat.image}
                           className='w-full h-full object-scale-down'
+                          onError={(e) => (e.target.src = '/default-image.jpg')}
                         />
                     </div>
                   </div>
@@ -79,7 +78,7 @@ const Home = () => {
           )
         }
       </div>
-      {/* {
+      {
         categoryData?.map((c,index)=>{
           return(
             <CategoryWiseProductDisplay 
@@ -89,7 +88,7 @@ const Home = () => {
             />
           )
         })
-      } */}
+      }
     </section>
   )
 }
