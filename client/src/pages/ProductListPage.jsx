@@ -5,6 +5,7 @@ import Axios from '../utils/Axios'
 import SummaryApi from '../common/SummaryApi'
 import AxiosToastError from '../utils/AxiosToastError'
 import CardProduct from '../components/CardProduct'
+import Loading from '../components/Loading'
 
 const ProductListPage = () => {
 
@@ -126,6 +127,11 @@ const ProductListPage = () => {
                 }
               </div>
             </div>
+            {
+              loading && (
+                <Loading/>
+              ) 
+            }
           </div>
         </div>
     </div>
