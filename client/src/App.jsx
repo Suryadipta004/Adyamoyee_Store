@@ -10,6 +10,7 @@ import { setUserDetails } from './store/userSlice'
 import { setAllCategory } from './store/productSlice';
 import Axios from './utils/Axios';
 import SummaryApi from './common/SummaryApi';
+import GlobalProvider from './provider/GlobalProvider';
 import { setLoadingCategory , setAllSubCategory } from './store/productSlice';
 
 function App() {
@@ -68,12 +69,14 @@ function App() {
   },[])
   return (
     <>
+    <GlobalProvider> 
       <Header/>
         <main className='min-h-[78vh]'>
           <Outlet />
         </main>
       <Footer/>
       <Toaster/>
+      </GlobalProvider>
     </>
   )
 }
