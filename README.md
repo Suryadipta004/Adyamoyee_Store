@@ -1,2 +1,2 @@
-# Adyamoyee_Store
+# Adhyamayee Store
  Retail Shop WebSite
