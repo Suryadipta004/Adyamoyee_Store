@@ -30,7 +30,7 @@ const productSchema = new mongoose.Schema({
     },
     price : {
         type : Number,
-        defualt : null
+        default : null
     },
     discount : {
         type : Number,
@@ -55,7 +55,7 @@ const productSchema = new mongoose.Schema({
 //create a text index
 productSchema.index({
     name  : "text",
-    description : 'text'
+    description : "text"
 },{
     name : 10,
     description : 5
