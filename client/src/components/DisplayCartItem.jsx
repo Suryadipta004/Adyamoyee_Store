@@ -4,6 +4,11 @@ import { IoClose } from 'react-icons/io5'
 import { useSelector } from 'react-redux'
 import { useGlobalContext } from '../provider/GlobalProvider'
 import imageEmpty from '../assets/empty_cart.webp'
+import { DisplayPriceInRupees } from '../utils/DisplayPriceInRupees'
+import { i } from 'framer-motion/client'
+import AddToCartButton from './AddToCartButton'
+import { pricewithDiscount } from '../utils/PriceWithDiscount'
+import toast from 'react-hot-toast'
 
 const DisplayCartItem = ({close}) => {
     const { notDiscountTotalPrice, totalPrice ,totalQty} = useGlobalContext()
@@ -11,6 +16,17 @@ const DisplayCartItem = ({close}) => {
     const user = useSelector(state => state.user)
     const navigate = useNavigate()
 
+    const redirectToCheckoutPage = ()=>{
+        if(user?._id){
+            navigate("/checkout")
+            if(close){
+                close()
+            }
+            return
+        }
+        toast("Please Login")
+    }
+     console.log(cartItem)
 
   return (
     <section className='bg-neutral-900 fixed top-0 bottom-0 right-0 left-0 bg-opacity-70 z-50'>
@@ -28,10 +44,40 @@ const DisplayCartItem = ({close}) => {
                 <div>
                     {
                         cartItem[0] ? (
-                            <div>
-
-                            </div>
-
+                            <>
+                                <div>
+                                    <div className='flex items-center justify-between px-4 py-2 bg-blue-100 text-blue-500 rounded-full'>
+                                        <p>Your total savings</p>
+                                        <p>{DisplayPriceInRupees(notDiscountTotalPrice - totalPrice )}</p>
+                                    </div>
+                                    <div className='bg-white rounded-lg p-4 grid gap-5 overflow-auto'>
+                                        {
+                                            cartItem[0] && (
+                                                cartItem.map((item,index) => {
+                                                    return(
+                                                        <div key={item?._id+"cartItemDisplay"} className='flex  w-full gap-4'>
+                                                            {/* <div className='w-16 h-16 min-h-16 min-w-16 bg-red-500 border rounded'>
+                                                                <img
+                                                                    src={item.productId.image[0]}
+                                                                    className='object-scale-down'
+                                                                />
+                                                            </div> */}
+                                                            <div className='w-full max-w-sm text-xs'>
+                                                                <p className='text-xs text-ellipsis line-clamp-2'>{item?.productId?.name}</p>
+                                                                <p className='text-neutral-400'>{item?.productId?.unit}</p>
+                                                                <p className='font-semibold'>{DisplayPriceInRupees(pricewithDiscount(item?.productId?.price,item?.productId?.discount))}</p>
+                                                            </div>
+                                                            <div>
+                                                                <AddToCartButton data={item?.productId} />
+                                                            </div>
+                                                        </div>
+                                                    )
+                                                })
+                                            )
+                                        }
+                                    </div>
+                                </div>
+                            </>
                         ):(
                             <div className='bg-white flex flex-col justify-center items-center'>
                                 <img
