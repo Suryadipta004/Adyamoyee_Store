@@ -143,7 +143,7 @@ import { GoTriangleDown, GoTriangleUp  } from "react-icons/go";
 import UserMenu from './UserMenu';
 import { DisplayPriceInRupees } from '../utils/DisplayPriceInRupees';
 import { useGlobalContext } from '../provider/GlobalProvider';
-// import DisplayCartItem from './DisplayCartItem';
+import DisplayCartItem from './DisplayCartItem.jsx';
 
 const Header = () => {
     const [ isMobile ] = useMobile()
@@ -286,11 +286,11 @@ const Header = () => {
             <Search/>
         </div>
 
-        {/* {
+        {
             openCartSection && (
                 <DisplayCartItem close={()=>setOpenCartSection(false)}/>
             )
-        } */}
+        }
     </header>
   )
 }
