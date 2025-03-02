@@ -53,7 +53,7 @@ export const getCartItemController = async(request,response) =>{
         const cartItem = await CartProductModel.find({
             userId : userId
         })
-        //.populate('productId')
+        // .populate('productId')
 
         return response.status(200).json({
             data : cartItem,
