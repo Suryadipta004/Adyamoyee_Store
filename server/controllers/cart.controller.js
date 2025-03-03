@@ -52,8 +52,7 @@ export const getCartItemController = async(request,response) =>{
         const userId = request.userId 
         const cartItem = await CartProductModel.find({
             userId : userId
-        })
-        // .populate('productId')
+        }).populate('productId')
 
         return response.status(200).json({
             data : cartItem,
@@ -107,7 +106,7 @@ export const updateCartItemsQtyController = async(request, response) =>{
         const userId = request.userId
         const {_id,quantity} = request.body
 
-        if(!_id || !quantity){
+        if(!_id || quantity === undefined){
             return response.status(400).json({
                 message : "Product id and quantity is required",
                 success : false,
