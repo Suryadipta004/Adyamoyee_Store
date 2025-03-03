@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 import { useGlobalContext } from '../provider/GlobalProvider'
 import imageEmpty from '../assets/empty_cart.webp'
 import { DisplayPriceInRupees } from '../utils/DisplayPriceInRupees'
-// import { i } from 'framer-motion/client'
+import { FaCaretRight } from "react-icons/fa";
 import AddToCartButton from './AddToCartButton'
 import { pricewithDiscount } from '../utils/PriceWithDiscount'
 import toast from 'react-hot-toast'
@@ -76,6 +76,25 @@ const DisplayCartItem = ({close}) => {
                                             )
                                         }
                                     </div>
+                                    <div className='bg-white p-4'>
+                                        <h3 className='font-semibold'>Bill details</h3>
+                                        <div className='flex gap-4 justify-between ml-1'>
+                                            <p>Total Items</p>
+                                            <p className='fleex items-center gap-2'><span className='line-through text-neutral-400'>{DisplayPriceInRupees(notDiscountTotalPrice)}</span><span>{DisplayPriceInRupees(totalPrice)}</span></p>
+                                        </div>
+                                        <div className='flex gap-4 justify-between ml-1'>
+                                            <p>Quantity in Total</p>
+                                            <p className='flex items-center gap-2'>{totalQty}</p>
+                                        </div>
+                                        <div className='flex gap-4 justify-between ml-1'>
+                                            <p>Delivery Charge</p>
+                                            <p className='flex items-center gap-2'>Free</p>
+                                        </div>
+                                        <div className='font-semibold flex items-center justify-between gap-4'>
+                                            <p>Grand Total</p>
+                                            <p>{DisplayPriceInRupees(totalPrice)}</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </>
                         ):(
@@ -90,6 +109,21 @@ const DisplayCartItem = ({close}) => {
                     }
                 </div>
             </div>
+            {
+                cartItem[0] && (
+                    <div className='p-2'>
+                        <div className='bg-green-700 text-neutral-100 px-4 font-bold text-base py-4 static bottom-3 rounded flex items-center gap-4 justify-between'>
+                            <div>
+                                {DisplayPriceInRupees(totalPrice)}
+                            </div>
+                            <button onClick={redirectToCheckoutPage} className='flex items-center gap-2'>
+                                Proceed
+                                <span><FaCaretRight/></span>
+                            </button>
+                        </div>
+                    </div>
+                )
+            }
         </div>
     </section>
   )
