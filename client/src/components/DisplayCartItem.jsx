@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 import { useGlobalContext } from '../provider/GlobalProvider'
 import imageEmpty from '../assets/empty_cart.webp'
 import { DisplayPriceInRupees } from '../utils/DisplayPriceInRupees'
-import { i } from 'framer-motion/client'
+// import { i } from 'framer-motion/client'
 import AddToCartButton from './AddToCartButton'
 import { pricewithDiscount } from '../utils/PriceWithDiscount'
 import toast from 'react-hot-toast'
@@ -56,16 +56,16 @@ const DisplayCartItem = ({close}) => {
                                                 cartItem.map((item,index) => {
                                                     return(
                                                         <div key={item?._id+"cartItemDisplay"} className='flex  w-full gap-4'>
-                                                            {/* <div className='w-16 h-16 min-h-16 min-w-16 bg-red-500 border rounded'>
+                                                            <div className='w-16 h-16 min-h-16 min-w-16 bg-red-500 border rounded'>
                                                                 <img
                                                                     src={item.productId.image[0]}
                                                                     className='object-scale-down'
                                                                 />
-                                                            </div> */}
+                                                            </div>
                                                             <div className='w-full max-w-sm text-xs'>
                                                                 <p className='text-xs text-ellipsis line-clamp-2'>{item?.productId?.name}</p>
                                                                 <p className='text-neutral-400'>{item?.productId?.unit}</p>
-                                                                <p className='font-semibold'>{DisplayPriceInRupees(pricewithDiscount(item?.productId?.price,item?.productId?.discount))}</p>
+                                                                <p className='font-semibold'>{DisplayPriceInRupees(pricewithDiscount(item?.productId?.price , item?.productId?.discount))}</p>
                                                             </div>
                                                             <div>
                                                                 <AddToCartButton data={item?.productId} />
