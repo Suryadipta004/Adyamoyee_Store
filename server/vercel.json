@@ -1,17 +1,21 @@
 {
-    "version" : 2,
-    "name" : "Adyamoyee Store",
-    "builds" : [
+    "version": 2,
+    "name": "adyamoyee-store",
+    "builds": [
         {
-            "src" : "./index.js",
-            "use" : "@vercel/node"
+            "src": "index.js",
+            "use": "@vercel/node"
         }
     ],
-    "routes" : [
+    "routes": [
         {
-            "src" : "/(.*)",
-            "dest" : "/"
+            "src": "/api/(.*)",
+            "dest": "index.js"
         }
-    ]
-}     
-// n
+    ],
+    "env": {
+        "MONGO_URI": "@mongo_uri",
+        "FRONTEND_URL": "@frontend_url",
+        "PORT": "8080"
+    }
+}
