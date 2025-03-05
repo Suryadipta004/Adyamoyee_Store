@@ -55,7 +55,7 @@ const CheckoutPage = () => {
   const handleOnlinePayment = async()=>{
     try {
         toast.loading("Loading...")
-        const stripePublicKey = import.meta.env.VITE_STRIPE_PUBLIC_KEY
+        const stripePublicKey = "pk_test_51Qz2NPP5kIQppcjh4nJal90qBRVFnUzScO4r77zh7AWdG55NBA4Xqs09OAZwoU2kbDo8skXeMAGJN4grcBBXeXL500fVIBLu9l"
         const stripePromise = await loadStripe(stripePublicKey)
        
         const response = await Axios({
